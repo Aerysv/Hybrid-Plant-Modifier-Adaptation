@@ -2,7 +2,7 @@ clear all %#ok<CLALL>
 clc
 
 %% Establecer conexion con el servidor
-uaClient = opcua('Labo6',16700);   % Crear Instancia de OPC UA
+uaClient = opcua('localhost',16702);   % Crear Instancia de OPC UA
 connect(uaClient);                  % Conectarse al servidor
 topNodes = uaClient.Namespace;      % Obtener espacio de nombres
 
@@ -43,7 +43,7 @@ function readableNodes = CreateReadableNodes(topNodes)
     Ca = findNodeByName(topNodes, 'Ca', '-once');
     Cb = findNodeByName(topNodes, 'Cb', '-once');
     q  = findNodeByName(topNodes, 'q' , '-once');
-    Fr = findNodeByName(topNodes, 'qc', '-once');
+    Fr = findNodeByName(topNodes, 'Fr', '-once');
     T  = findNodeByName(topNodes, 'T' , '-once');
     Tc = findNodeByName(topNodes, 'Tc', '-once');
     T0 = findNodeByName(topNodes, 'T0', '-once');
@@ -53,11 +53,11 @@ function readableNodes = CreateReadableNodes(topNodes)
     LiminfT  = findNodeByName(topNodes, 'LiminfT' , '-once');
     LiminfCb = findNodeByName(topNodes, 'LiminfCb', '-once');
     Liminfq  = findNodeByName(topNodes, 'Liminfq' , '-once');
-    LiminfFr = findNodeByName(topNodes, 'Liminfqc', '-once');
+    LiminfFr = findNodeByName(topNodes, 'LiminfFr', '-once');
     LimsupT  = findNodeByName(topNodes, 'LimsupT' , '-once');
     LimsupCb = findNodeByName(topNodes, 'LimsupCb', '-once');
     Limsupq  = findNodeByName(topNodes, 'Limsupq' , '-once');
-    LimsupFr = findNodeByName(topNodes, 'Limsupqc', '-once');
+    LimsupFr = findNodeByName(topNodes, 'LimsupFr', '-once');
 
     % Precios
     p_Ca = findNodeByName(topNodes, 'p_Ca', '-once');
@@ -76,7 +76,7 @@ end
 function writableNodes = CreateWritableNodes(topNodes)
     % Creacion de nodos para escribir datos
     uq1  = findNodeByName(topNodes, 'uq[1]' , '-once');
-    uFr1 = findNodeByName(topNodes, 'uqc[1]', '-once');
+    uFr1 = findNodeByName(topNodes, 'uFr[1]', '-once');
     
     writableNodes = [uq1; uFr1];
 end
@@ -107,7 +107,6 @@ function control_actions = RunMA(readNodes)
     p_Fr = readNodes(21);
     
     q = 1;
-    qc = 15;
-    control_actions = [q; qc];
+    Fr = 15;
+    control_actions = [q; Fr];
 end
-
