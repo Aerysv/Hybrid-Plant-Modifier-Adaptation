@@ -1,10 +1,10 @@
-clear all %#ok<CLALL>
+clear all
 clc
 
 %% Establecer conexion con el servidor
-uaClient = opcua('localhost',16702);   % Crear Instancia de OPC UA
-connect(uaClient);                  % Conectarse al servidor
-topNodes = uaClient.Namespace;      % Obtener espacio de nombres
+uaClient = opcua('localhost',16702);    % Crear Instancia de OPC UA
+connect(uaClient);                      % Conectarse al servidor
+topNodes = uaClient.Namespace;          % Obtener espacio de nombres
 
 % Creacion de nodos para recibir datos
 readableNodes = CreateReadableNodes(topNodes);
