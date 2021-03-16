@@ -48,9 +48,6 @@ function readableNodes = CreateReadableNodes(topNodes)
     Tc = findNodeByName(topNodes, 'Tc', '-once');
     T0 = findNodeByName(topNodes, 'T0', '-once');
     Tc0 = findNodeByName(topNodes, 'Tc0', '-once');
-    % Parametros del controlador
-    Cb_sp = findNodeByName(topNodes, 'Cb_sp', '-once');
-    T_sp  = findNodeByName(topNodes, 'T_sp' , '-once');
 
     % Restricciones
     LiminfT  = findNodeByName(topNodes, 'LiminfT' , '-once');
@@ -70,9 +67,9 @@ function readableNodes = CreateReadableNodes(topNodes)
     p_Fr = findNodeByName(topNodes, 'p_Fr', '-once');
 
     % Verificar si esto funciona
-    readableNodes = [Ca;Cb;q;Fr;T;Tc;T0;Tc0;Cb_sp;T_sp;LiminfT;LiminfCb;
-                    Liminfq;LiminfFr;LimsupT;LimsupCb;Limsupq;LimsupFr;
-                    p_Ca;p_Cb;p_Cc;p_Cd;p_Fr];
+    readableNodes = [Ca;Cb;q;Fr;T;Tc;T0;Tc0;LiminfT;LiminfCb;Liminfq;
+                    LiminfFr;LimsupT;LimsupCb;Limsupq;LimsupFr;p_Ca;
+                    p_Cb;p_Cc;p_Cd;p_Fr];
 end
 
 %% Creacción de nodos de escritura
@@ -95,21 +92,19 @@ function control_actions = RunMA(readNodes)
     Tc = readNodes(6);
     T0 = readNodes(7);
     Tc0 = readNodes(8);
-    Cb_sp = readNodes(9);
-    T_sp  = readNodes(10);
-    LiminfT  = readNodes(11);
-    LiminfCb = readNodes(12);
-    Liminfq  = readNodes(13);
-    LiminfFr = readNodes(14);
-    LimsupT  = readNodes(15);
-    LimsupCb = readNodes(16);
-    Limsupq  = readNodes(17);
-    LimsupFr = readNodes(18);
-    p_Ca = readNodes(19);
-    p_Cb = readNodes(20);
-    p_Cc = readNodes(21);
-    p_Cd = readNodes(22);
-    p_Fr = readNodes(23);
+    LiminfT  = readNodes(9);
+    LiminfCb = readNodes(10);
+    Liminfq  = readNodes(11);
+    LiminfFr = readNodes(12);
+    LimsupT  = readNodes(13);
+    LimsupCb = readNodes(14);
+    Limsupq  = readNodes(15);
+    LimsupFr = readNodes(16);
+    p_Ca = readNodes(17);
+    p_Cb = readNodes(18);
+    p_Cc = readNodes(19);
+    p_Cd = readNodes(20);
+    p_Fr = readNodes(21);
     
     q = 1;
     qc = 15;
