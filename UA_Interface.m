@@ -75,8 +75,8 @@ end
 %% Creacción de nodos de escritura
 function writableNodes = CreateWritableNodes(topNodes)
     % Creacion de nodos para escribir datos
-    uq1  = findNodeByName(topNodes, 'uq[1]' , '-once');
-    uFr1 = findNodeByName(topNodes, 'uFr[1]', '-once');
+    uq1  = findNodeByName(topNodes, 'uq1' , '-once');
+    uFr1 = findNodeByName(topNodes, 'uFr1', '-once');
     
     writableNodes = [uq1; uFr1];
 end
