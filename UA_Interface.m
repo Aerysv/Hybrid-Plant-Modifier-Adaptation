@@ -17,18 +17,21 @@ ControlFlag = true;
 running = true;
 while running
     try
-        fprintf("%s: Executing...\n", datestr(now,'HH:MM:SS'));
+        tic;    % Registrar el tiempo que tarda el programa en ejecutar
+        fprintf("%s: Executing...", datestr(now,'HH:MM:SS'));
         readNodes = readableNodes.readValue();
-        % Conditional (ControlFlag) para calcular acciones de control y escribirlas.
+
         if ControlFlag
             % Calcular acciones de control
             control_actions = RunMA(readNodes);
             % Enviar acciones de control al SCADA
-            control_actions = num2cell(control_actions); % Convertir array a cell
-            writeValue(writableNodes, control_actions);
+            writeValue(writableNodes, num2cell(control_actions));
+            
+            fprintf(" q = %.2f   Fr = %.2f \n", [control_actions]);
         end
         
-        pause(30);   % Pausar por 30 segundos
+        tSpent = toc;
+        pause(30 - tSpent);	% Pausar por 30 segundos menos el tiempo de ejecución
 
     catch ME
         warning('Execution finished. Disconnecting OPC-UA server...')
