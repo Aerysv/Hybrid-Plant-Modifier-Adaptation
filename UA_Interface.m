@@ -15,11 +15,14 @@ writableNodes = CreateWritableNodes(topNodes);
 %% Controlador
 ControlFlag = true;
 running = true;
+
 while running
     try
         tic;    % Registrar el tiempo que tarda el programa en ejecutar
         fprintf("%s: Executing...\n", datestr(now,'HH:MM:SS'));
+        
         readNodes = readableNodes.readValue();
+        
         fprintf("          Variables read from the SCADA.\n")
 
         if ControlFlag
@@ -27,6 +30,7 @@ while running
             control_actions = RunMA(readNodes);
             % Enviar acciones de control al SCADA
             writeValue(writableNodes, num2cell(control_actions));
+            
             fprintf("          Control actions have been written.\n");
             fprintf("               q = %.2f Fr = %.2f \n", [control_actions]);
         end
@@ -73,9 +77,9 @@ function readableNodes = CreateReadableNodes(topNodes)
     p_Fr = findNodeByName(topNodes, 'p_Fr', '-once');
     
     % Verificar si esto funciona
-    readableNodes = [Ca;Cb;q;Fr;T;Tc;T0;Tc0;LiminfT;LiminfCb;Liminfq;
-                    LiminfFr;LimsupT;LimsupCb;Limsupq;LimsupFr;p_Ca;
-                    p_Cb;p_Cc;p_Cd;p_Fr];
+    readableNodes = [Ca; Cb; q; Fr; T; Tc; T0; Tc0; LiminfT; LiminfCb; Liminfq;
+                    LiminfFr; LimsupT; LimsupCb; Limsupq; LimsupFr; p_Ca;
+                    p_Cb; p_Cc; p_Cd; p_Fr];
 end
 
 %% Creacción de nodos de escritura
