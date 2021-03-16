@@ -17,6 +17,7 @@ ControlFlag = true;
 running = true;
 while running
     try
+        fprintf("%s: Executing...\n", datestr(now,'HH:MM:SS'));
         readNodes = readableNodes.readValue();
         % Conditional (ControlFlag) para calcular acciones de control y escribirlas.
         if ControlFlag
